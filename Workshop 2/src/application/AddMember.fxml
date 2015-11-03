@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="pane" prefHeight="192.0" prefWidth="239.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MemberController">
+   <children>
+      <TextField fx:id="name" layoutY="28.0" promptText="Enter the name" />
+      <TextField fx:id="personnumber" layoutY="74.0" promptText="Enter person number" />
+      <Button fx:id="create" layoutY="127.0" mnemonicParsing="false" onAction="#addMember" text="Create member" />
+      <Button fx:id="cancel" layoutX="128.0" layoutY="127.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
+      <TextField fx:id="errrortext" layoutX="14.0" layoutY="153.0" text="Please fill in the information" visible="false">
+         <font>
+            <Font name="AR ESSENCE" size="12.0" />
+         </font>
+      </TextField>
+   </children>
+</AnchorPane>

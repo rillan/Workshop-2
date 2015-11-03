@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="129.0" prefWidth="211.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MemberController">
+   <children>
+      <TextField fx:id="deleteTextField" promptText="Enter id to delete" text="Enter id to delete" />
+      <Button fx:id="deleteOk" layoutX="6.0" layoutY="103.0" mnemonicParsing="false" onAction="#deleteMember" text="Ok">
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect></Button>
+      <Button fx:id="deleteCancel" layoutX="123.0" layoutY="103.0" mnemonicParsing="false" onAction="#cancel" text="Cancel">
+         <effect>
+            <Lighting>
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect></Button>
+   </children>
+   <effect>
+      <Glow level="0.15" />
+   </effect>
+</AnchorPane>
