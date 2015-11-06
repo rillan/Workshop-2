@@ -1,5 +1,6 @@
 package workshop;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.persistence.Column;
@@ -28,9 +29,10 @@ public class Member implements Iterator<Member> {
 	public String name;
 	@Column(name = "personNumber")
 	public String personNumber;
-
+	@Column(name = "numberOfBoats")
 	public int numberOfBoats = 0; 
-	
+	@Column(name = "listofBoats")
+	public ArrayList <Boat> listofBoats = new ArrayList<Boat>();
 	
 	public Member(){
 		
@@ -53,6 +55,22 @@ public class Member implements Iterator<Member> {
 		
 	}
 	
+	public  String getVerbose(Member member){
+		if(member.listofBoats.size() > 0){
+		String info = "";
+		
+		for(Boat boat:listofBoats ){
+		info += "Boattype "+boat.type +" Boatlength"+ boat.length+ ", ";
+		
+		}
+		
+		return "Memberinformation " +name +" " + personNumber +"\n Boatinformation "+ numberOfBoats+" "+ info ;
+		}
+		else{
+			return "Memberinformation" +name +" " + personNumber + " Has 0 boats";
+		}
+	}
+	
 	public String getMemberAndBoatInfo(){
 		return this.name +" " + this.personNumber +" "+ this.numberOfBoats;
 	}
@@ -68,7 +86,9 @@ public class Member implements Iterator<Member> {
 		boat.type = type;
 		
 		boat.length = length;
-	
+		this.numberOfBoats =numberOfBoats+1;
+		this.listofBoats.add(boat);
+		
 	}
 
 	@Override

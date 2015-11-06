@@ -53,7 +53,8 @@ public class Main extends Application {
 	    private Button updateButton;
 	    @FXML
 	    private Button compose;
-
+	    @FXML
+	    private Button deleteBoat;
 	    @FXML
 	    private GridPane grid;
 
@@ -93,7 +94,10 @@ public class Main extends Application {
 	    	 stage.setScene(scene);
 	    	 stage.setTitle("Delete a member");
 	    	 stage.show();
-	     }   
+	     }
+	    
+	    
+	    
 	    @FXML
 	     private void updateMember(ActionEvent event) throws IOException{
 	    	
@@ -110,6 +114,23 @@ public class Main extends Application {
 	    	 stage.show();
 	     }  
 	    
+	    // Boat methods
+	    
+	    @FXML
+	     private void deleteBoatMethod(ActionEvent event) throws IOException{
+	    	
+	    	 Parent root = null;
+	    	 if(event.getSource()== deleteBoat){
+	    	 FXMLLoader loader = new FXMLLoader(Main.class.getResource("DeleteBoat.fxml"));
+	    	 
+	    	  root = (Parent) loader.load();
+	     }
+	    	 Scene scene = new Scene(root);
+	    	 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+	    	 stage.setScene(scene);
+	    	 stage.setTitle("Delete a boat");
+	    	 stage.show();
+	     }  
 	    
 	
 	@Override
@@ -137,6 +158,17 @@ public class Main extends Application {
         for (Member event : list) { //for better performance
 			
         System.out.println(event.getInfo());
+        }
+		  }
+	
+	@FXML
+	public void showCompose(){
+		
+        List<Member> list = new ArrayList<>();
+        list.addAll(DB.members().findAll());
+        for (Member event : list) { //for better performance
+			
+        System.out.println(event.getVerbose(event));
         }
 		  }
 		  

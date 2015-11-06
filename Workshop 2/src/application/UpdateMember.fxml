@@ -7,10 +7,12 @@
 
 <AnchorPane prefHeight="215.0" prefWidth="272.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MemberController">
    <children>
-      <Button fx:id="UpdateMember" layoutX="14.0" layoutY="133.0" mnemonicParsing="false" onAction="#updateMember" text="Update" />
-      <Button layoutX="141.0" layoutY="133.0" mnemonicParsing="false" onAction="#cancel" text="Return" />
+      <Button fx:id="UpdateMember" layoutX="14.0" layoutY="171.0" mnemonicParsing="false" onAction="#updateMember" text="Update" />
+      <Button layoutX="163.0" layoutY="171.0" mnemonicParsing="false" onAction="#cancel" text="Return" />
       <TextField fx:id="ID" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="194.0" promptText="Enter ID" />
       <TextField fx:id="updateName" layoutX="14.0" layoutY="47.0" prefHeight="25.0" prefWidth="194.0" promptText="Enter a new Name" />
       <TextField fx:id="personNumber" layoutX="14.0" layoutY="83.0" prefHeight="25.0" prefWidth="194.0" promptText="Enter a new PersonNumber" />
+      <TextField fx:id="boatInfo" layoutX="14.0" layoutY="108.0" promptText="Boatname and Length" />
+      <TextField fx:id="error" layoutX="14.0" layoutY="140.0" text="Something is wrong" visible="false" />
    </children>
 </AnchorPane>

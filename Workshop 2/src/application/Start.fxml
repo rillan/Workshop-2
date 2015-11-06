@@ -19,7 +19,8 @@
       <Button fx:id="create" mnemonicParsing="false" onAction="#createMember" text="Create member" />
       <Button fx:id="compact" mnemonicParsing="false" onAction="#showMemberinfo" text="Open compactview" GridPane.rowIndex="1" />
       <Button fx:id="delete" mnemonicParsing="false" onAction="#deleteMember" text="Delete Member" GridPane.columnIndex="1" />
-      <Button fx:id="compose" mnemonicParsing="false" text="Open composeview" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <Button fx:id="compose" mnemonicParsing="false" onAction="#showCompose" text="Open composeview" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <Button fx:id="updateButton" layoutX="10.0" layoutY="65.0" mnemonicParsing="false" onAction="#updateMember" text="Update member" GridPane.columnIndex="2" />
+      <Button fx:id="deleteBoat" mnemonicParsing="false" onAction="#deleteBoatMethod" text="Delete Boat" GridPane.columnIndex="2" GridPane.rowIndex="1" />
    </children>
 </GridPane>

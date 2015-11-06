@@ -3,6 +3,8 @@ package Database;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import workshop.Boat;
+import workshop.Member;
+
 import java.util.List;
 
 
@@ -40,14 +42,15 @@ public class BoatDAO implements databaseInterface<Boat> {
 
 	@Override
 	public void save(Boat entity) {
-		// TODO Auto-generated method stub
-		
+		Transaction transaction = session.beginTransaction();
+        session.persist(entity);
+        transaction.commit();
 	}
 
 	@Override
 	public Boat findById(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return (Boat) session.get(Boat.class, id);
+		
 	}
 
 }
