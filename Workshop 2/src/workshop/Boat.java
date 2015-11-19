@@ -1,4 +1,6 @@
 	package workshop;
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +14,7 @@ import workshop.Member;
 @Table(name = "Boat")
 
 
-public class Boat {
+public class Boat implements Serializable {
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
@@ -33,7 +35,10 @@ public class Boat {
 		return(boat.length+" "  +boat.type);
 	}
 	
-	
+	public void updateMember(String name, int length){
+		this.type = name;
+		this.length = length;
+	}
 	
 	public static String getBoatOwner(Member member){
 		String information = "";
@@ -46,11 +51,7 @@ public class Boat {
 	}
 	
 	public static void main(String[] args) {
-		Member rolf = new Member("Rolf Sten", "23");
-		Member rolf2 = new Member("Rolf Sten", "23");
-//		rolf.registerBoat(Motor, 15);
-		
-		System.out.println("test");
+	
 		
 }
 }

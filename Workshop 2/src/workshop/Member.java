@@ -64,7 +64,7 @@ public class Member implements Iterator<Member> {
 		
 		}
 		
-		return "Memberinformation " +name +" " + personNumber +"\n Boatinformation "+ numberOfBoats+" "+ info ;
+		return "Memberinformation " +member.name +" " + member.personNumber +"\n Boatinformation "+ numberOfBoats+" "+ info ;
 		}
 		else{
 			return "Memberinformation" +name +" " + personNumber + " Has 0 boats";
@@ -88,6 +88,11 @@ public class Member implements Iterator<Member> {
 		boat.length = length;
 		this.numberOfBoats =numberOfBoats+1;
 		this.listofBoats.add(boat);
+		
+	}
+	public void deleteBoat(long id){
+		DB.boats().findById(id);
+		
 		
 	}
 

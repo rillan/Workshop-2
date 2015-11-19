@@ -15,6 +15,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
 
 import Database.DB;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +25,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -35,7 +38,27 @@ public class MemberController implements Initializable {
 	public Main main ;
 	@FXML
     private TextField deleteTextField;
-
+	 @FXML
+	    private ListView composeList;
+	 
+	 @FXML
+	    private ListView verboseList ;
+	 
+	 @FXML
+	    private ListView oneMember ;
+	 @FXML
+	    private TextField memberID;
+	 @FXML
+	 ObservableList<String> singleInformation =FXCollections.observableArrayList()  ;
+	 
+	 @FXML
+	 ObservableList<String> composeInformation =FXCollections.observableArrayList()  ;
+	
+	 @FXML
+	 ObservableList<String> verboseInformation =FXCollections.observableArrayList()  ;
+	 @FXML
+	    private Button oneMemberButton;
+	 
     @FXML
     private Button deleteCancel;
 
@@ -83,6 +106,11 @@ public class MemberController implements Initializable {
 	    private TextField boatInfo;
 	    @FXML
 	    private TextField personNumber;
+	    @FXML
+	    private Button addBoat;
+
+	   
+	   
 
 	    @FXML
 	    private Button UpdateMember;
@@ -122,8 +150,8 @@ public class MemberController implements Initializable {
 
     @FXML
     private void updateMember(ActionEvent event)throws IOException{
-    	if(ID.getText().matches(numbers) && updateName.getText().matches(alphabet) && personNumber.getText().matches(numbers) && boatInfo.getText().matches(boat)   ){
-    		error.setVisible(false);
+   	if(ID.getText().matches(numbers) && updateName.getText().matches(alphabet) && personNumber.getText().matches(numbers) && boatInfo.getText().matches(boat)   ){
+    		
     	String memberID = ID.getText();
     	Long id = Long.parseLong(memberID);
     	member = (Member) DB.members().findById(id);
@@ -143,7 +171,7 @@ public class MemberController implements Initializable {
     	if(boatname.matches(kayak)|| boatname.matches(motorboat) || boatname.matches(sailboat) || boatname.matches(other)  ){
     	member.registerBoat(boatname, length);
     	Boat boatToAdd = new Boat(boatname,length);
-    	DB.boats().save(boatToAdd);
+   	DB.boats().save(boatToAdd);
     	member.updateMember(name,newPersonNumber);
     	}
     	
@@ -151,10 +179,18 @@ public class MemberController implements Initializable {
     	}
     	else
     		error.setVisible(true);
-    		
+   		
     	
     }
-	        
+   @FXML
+   public void showMember(ActionEvent event)throws IOException{
+   	String theID = memberID.getText();
+	Long id = Long.parseLong(theID);
+	member = (Member) DB.members().findById(id);
+   	singleInformation.add(member.getVerbose(member));
+   	oneMember.setItems(singleInformation);
+   	oneMember.setVisible(true);
+   }
 	    @FXML
 	    private void cancel(ActionEvent event)throws IOException{
 	    	Parent root = null;
@@ -168,6 +204,33 @@ public class MemberController implements Initializable {
 	    	 stage.show();
 	    	 
 	    }
+	    
+	    @FXML
+		public void showCompose(){
+			
+	        List<Member> list = new ArrayList<>();
+	        list.addAll(DB.members().findAll());
+	        for (Member event : list) { //for better performance
+				composeInformation.add(event.getVerbose(event));
+	        	composeList.setItems(composeInformation);
+//				composeList.setVisible(true);
+	        }
+	    }
+	    
+	    @FXML
+		public void showVerbose(){
+			
+	        List<Member> list = new ArrayList<>();
+	        list.addAll(DB.members().findAll());
+	        for (Member event : list) { //for better performance
+	        	verboseInformation.add(event.getInfo());
+	        	verboseList.setItems(verboseInformation);
+//	        	verboseList.setVisible(true);
+	        	
+	        }
+			  }
+		
+	    
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
