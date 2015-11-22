@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="336.0" prefWidth="452.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MemberController">
+   <children>
+      <Button fx:id="oneMemberButton" layoutX="14.0" layoutY="127.0" mnemonicParsing="false" onAction="#showMember" text="Show member" />
+      <Button fx:id="composeReturn" layoutX="120.0" layoutY="127.0" mnemonicParsing="false" onAction="#cancel" text="Return" />
+      <ListView fx:id="oneMember" layoutX="193.0" layoutY="27.0" prefHeight="200.0" prefWidth="200.0" visible="false" />
+      <TextField fx:id="memberID" layoutY="53.0" />
+   </children>
+</AnchorPane>
