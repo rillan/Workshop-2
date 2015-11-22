@@ -3,6 +3,7 @@ package application;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -10,20 +11,23 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import Database.BoatDAO;
 import Database.DB;
+import Database.MemberDAO;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
-
-import workshop.Boat;
-import workshop.Member;
+import model.Boat;
+import model.Member;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -40,6 +44,10 @@ public class Main extends Application {
 	private AnchorPane pane;
 	@FXML
 	Parent root;
+	@FXML
+	MemberDAO membersData;
+	@FXML
+	BoatDAO boatData;
 	@FXML
 	private static Session session;
 	@FXML
@@ -71,25 +79,15 @@ public class Main extends Application {
 	    @FXML
 	    private Button delete;
 	    public static void main(String[] args) {
-			 try{
-				 List<Member> allMembers = new ArrayList();
-				 allMembers.addAll(DB.members().findAll());
-				 List<Boat> allBoats = new ArrayList();
-				 allBoats.addAll(DB.boats().findAll());
-				
-		         factory = new Configuration().configure().buildSessionFactory();
-		      }catch (Throwable ex) { 
-		         System.err.println("Failed to create sessionFactory object." + ex);
-		         throw new ExceptionInInitializerError(ex); 
-		      }
+			 
 			
 			
 			launch(args);
 		}
 	    @FXML
 	     private void createMember(ActionEvent event) throws IOException{
-	    	memberControll.showCompose();
-	    	memberControll.showVerbose();
+	    	
+	    	
 	    	 Parent root = null;
 	    	 if(event.getSource()== create){
 	    	 FXMLLoader loader = new FXMLLoader(Main.class.getResource("AddMember.fxml"));
@@ -183,12 +181,17 @@ public class Main extends Application {
 	    	 stage.show();
 	     }  
 	    
-	
+	      
 	@Override
 	public void start(Stage primaryStage)throws IOException {
 		FXMLLoader loader = new FXMLLoader(Main.class.getResource("Start.fxml"));
-		
-		root = (Parent) loader.load();
+		 List<Member> list = new ArrayList<>();
+	        list.addAll(DB.members().findAll());
+	        System.out.println(list.size());
+		for (Member event: list){
+			System.out.println("members id is" +event.id);
+		}
+		root = loader.load();
 		 Scene scene = new Scene(root);
     		primaryStage.setTitle("Workshop 2");
 			primaryStage.setScene(scene);
@@ -217,7 +220,7 @@ public class Main extends Application {
 		 
 	 @FXML
 		public void showVerbose(ActionEvent event) throws IOException{
-			
+		
 		 Parent root = null;
 	   	 if(event.getSource()== verbose){
 	   	 FXMLLoader loader = new FXMLLoader(Main.class.getResource("verboseView.fxml"));
@@ -248,7 +251,22 @@ public class Main extends Application {
 	   	 stage.show();
 	        
 	        }
-	
+	 public void listEmployees( ){
+	      Session session = factory.openSession();
+	      Transaction tx = null;
+	      try{
+	         tx = session.beginTransaction();
+	         List members = session.createQuery("FROM Member").list(); 
+	        
+	         
+	         tx.commit();}
+	      catch (HibernateException e) {
+	         if (tx!=null) tx.rollback();
+	         e.printStackTrace(); 
+	      }finally {
+	         session.close(); 
+	      }
+	   }
 	
 	public long getId() { return id; }
 	public void initialize(URL arg0, ResourceBundle arg1) {

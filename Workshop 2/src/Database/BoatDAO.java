@@ -2,8 +2,9 @@ package Database;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import workshop.Boat;
-import workshop.Member;
+
+import model.Boat;
+import model.Member;
 
 import java.util.List;
 
@@ -24,9 +25,17 @@ public class BoatDAO implements databaseInterface<Boat> {
 
 	@Override
 	public void delete(Boat entity) {
-		Transaction transaction = session.beginTransaction();
+		Transaction transaction = null;
+	
+		try{
+	
+		transaction = session.beginTransaction();
 		session.delete(entity);
 		transaction.commit();
+		}catch (RuntimeException e) {
+	        transaction.rollback();
+	        throw e;
+		}
 	}
 
 	@Override

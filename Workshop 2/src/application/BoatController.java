@@ -13,8 +13,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import workshop.Boat;
-import workshop.Member;
+import model.Boat;
+import model.Member;
 
 public class BoatController {
 	public Boat boat ;
@@ -79,6 +79,7 @@ public class BoatController {
    		String memberID = memberIDBoat.getText();
     	Long id = Long.parseLong(memberID);
     	member = (Member) DB.members().findById(id);
+    	
    		String test1 = (newBoat.getText());
     	String test2 = test1.replaceAll("[^a-zA-Z0-9]", "");
     	System.out.println(test2);

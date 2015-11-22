@@ -7,18 +7,20 @@ import org.hibernate.cfg.Configuration;
 
 import application.Main;
 import javafx.fxml.FXML;
+import model.Member;
 
 public class DB {
 
-	private static SessionFactory sessionFactory;
-	private static Session session;
-	private static BoatDAO BoatDAO;
-	private static MemberDAO MemberDao;
-	private static mainDAO mainDao;
+	public static SessionFactory sessionFactory;
+	public static Session session;
+	public static BoatDAO BoatDAO;
+	public static MemberDAO MemberDao;
+	public static mainDAO mainDao;
 	
 	static {
 		try {
 			Configuration configuration = new Configuration().configure();
+			
 			StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
 			builder.applySettings(configuration.getProperties());
 			sessionFactory = configuration.buildSessionFactory(builder.build());

@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
+import javax.transaction.Transaction;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;
@@ -30,11 +32,11 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import workshop.Boat;
-import workshop.Member;
+import model.Boat;
+import model.Member;
 
 public class MemberController implements Initializable {
-		
+	private static DB db;
 	public Main main ;
 	@FXML
     private TextField deleteTextField;
@@ -124,15 +126,18 @@ public class MemberController implements Initializable {
 	    
 	    public Member member;
 	    
-	    
+	    private static SessionFactory factory;
 	    @FXML
 	    public void addMember(ActionEvent event)throws IOException{
 	    	
 	    	if(name.getText().matches(alphabet)&& personnumber.getText().matches(numbers)){
+	    		
 	    		Member newMember = new Member(name.getText(),personnumber.getText());
 	    		System.out.println(newMember.name + newMember.personNumber);
 	    		DB.members().save(newMember);
+	    		
 	    		Parent root = null;
+	    		
 	        	FXMLLoader loader = new FXMLLoader(Main.class.getResource("Start.fxml"));
 	        	root = (Parent) loader.load();
 	       	 Scene scene = new Scene(root);
@@ -213,7 +218,7 @@ public class MemberController implements Initializable {
 	        for (Member event : list) { //for better performance
 				composeInformation.add(event.getVerbose(event));
 	        	composeList.setItems(composeInformation);
-//				composeList.setVisible(true);
+				composeList.setVisible(true);
 	        }
 	    }
 	    
@@ -225,7 +230,7 @@ public class MemberController implements Initializable {
 	        for (Member event : list) { //for better performance
 	        	verboseInformation.add(event.getInfo());
 	        	verboseList.setItems(verboseInformation);
-//	        	verboseList.setVisible(true);
+	        	verboseList.setVisible(true);
 	        	
 	        }
 			  }

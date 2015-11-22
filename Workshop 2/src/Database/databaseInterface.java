@@ -2,7 +2,7 @@ package Database;
 
 import java.util.List;
 
-import workshop.Member;
+import model.Member;
 
 public interface databaseInterface <T> {
 

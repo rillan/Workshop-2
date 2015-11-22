@@ -5,7 +5,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import workshop.Member;
+import model.Member;
 
 public class mainDAO implements databaseInterface<mainDAO> {
 	private final Session session;  

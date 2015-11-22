@@ -1,4 +1,4 @@
-package workshop;
+package model;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 import Database.DB;
 import javafx.scene.control.ListView;
-import workshop.Boat;
+import model.Boat;
 
 @Entity
 @Table(name = "Member")
@@ -64,7 +64,7 @@ public class Member implements Iterator<Member> {
 		
 		}
 		
-		return "Memberinformation " +member.name +" " + member.personNumber +"\n Boatinformation "+ numberOfBoats+" "+ info ;
+		return "Memberinformation "+ member.id +" " +member.name +" " + member.personNumber +"\n Boatinformation "+ numberOfBoats+" "+ info ;
 		}
 		else{
 			return "Memberinformation" +name +" " + personNumber + " Has 0 boats";

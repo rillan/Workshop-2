@@ -4,16 +4,15 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
+import model.Member;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.List;
 
-import workshop.Member;
-
 public class MemberDAO implements databaseInterface<Member> {
-		private final Session session;  
-		
+		private Session session;  
+		private static SessionFactory factory;
 		public  MemberDAO(Session session){
 		this.session = session;
 		}
@@ -54,8 +53,7 @@ public class MemberDAO implements databaseInterface<Member> {
 		Transaction transaction = session.beginTransaction();
         session.persist(entity);
         transaction.commit();
-		
-		
+       
 	
 	
      

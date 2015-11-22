@@ -11,8 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-
-import workshop.Member;
+import model.Member;
 
 public class ControllerStart implements Initializable {
 	

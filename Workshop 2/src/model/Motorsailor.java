@@ -1,4 +1,4 @@
-package workshop;
+package model;
 
 public class Motorsailor extends Boat {
 

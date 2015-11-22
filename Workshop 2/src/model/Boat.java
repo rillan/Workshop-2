@@ -1,4 +1,4 @@
-	package workshop;
+	package model;
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -8,13 +8,18 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import workshop.Member;
+import model.Member;
 
 @Entity
 @Table(name = "Boat")
 
 
 public class Boat implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2483240910538198571L;
+
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
