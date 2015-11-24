@@ -59,8 +59,5 @@ public class Boat implements Serializable {
 		return information;
 	}
 	
-	public static void main(String[] args) {
 	
-		
-}
 }

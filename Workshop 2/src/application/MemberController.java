@@ -126,7 +126,7 @@ public class MemberController implements Initializable {
 	    
 	    public Member member;
 	    
-	    private static SessionFactory factory;
+	   
 	    @FXML
 	    public void addMember(ActionEvent event)throws IOException{
 	    	
@@ -152,6 +152,8 @@ public class MemberController implements Initializable {
 	    	}
 	    }	
 
+	    
+	    // Method for updating a member
 
     @FXML
     private void updateMember(ActionEvent event)throws IOException{
@@ -186,17 +188,19 @@ public class MemberController implements Initializable {
     	else
     		error.setVisible(true);
    		
-    	
+    // Method for showing a single members information
     }
    @FXML
    public void showMember(ActionEvent event)throws IOException{
    	String theID = memberID.getText();
 	Long id = Long.parseLong(theID);
 	member = (Member) DB.members().findById(id);
-   	singleInformation.add(member.getVerbose(member));
+   	singleInformation.add(member.getCompose(member));
    	oneMember.setItems(singleInformation);
    	oneMember.setVisible(true);
    }
+   
+   // Method to return to main stage
 	    @FXML
 	    private void cancel(ActionEvent event)throws IOException{
 	    	Parent root = null;
@@ -211,17 +215,21 @@ public class MemberController implements Initializable {
 	    	 
 	    }
 	    
+	    // Method to show the compose list
+	    
 	    @FXML
 		public void showCompose(){
 			
 	        List<Member> list = new ArrayList<>();
 	        list.addAll(DB.members().findAll());
 	        for (Member event : list) { //for better performance
-				composeInformation.add(event.getVerbose(event));
+				composeInformation.add(event.getCompose(event));
 	        	composeList.setItems(composeInformation);
 				composeList.setVisible(true);
 	        }
 	    }
+	    
+	    // Method to show the verboselist
 	    
 	    @FXML
 		public void showVerbose(){
@@ -229,7 +237,7 @@ public class MemberController implements Initializable {
 	        List<Member> list = new ArrayList<>();
 	        list.addAll(DB.members().findAll());
 	        for (Member event : list) { //for better performance
-	        	verboseInformation.add(event.getInfo());
+	        	verboseInformation.add(event.getVerbose());
 	        	verboseList.setItems(verboseInformation);
 	        	verboseList.setVisible(true);
 	        	
@@ -243,6 +251,8 @@ public class MemberController implements Initializable {
 		
 		
 	}
+	
+	// Method to delete a member
 	 @FXML
      private void deleteMember(ActionEvent event) throws IOException{
 		 if(deleteTextField.getText().matches(numbers)){
