@@ -42,5 +42,9 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/olofro/Desktop/mysql-connector-java-5.1.37-bin.jar"/>
+	<classpathentry kind="lib" path="C:/Users/olofro/Downloads/aquafx-0.1-complete/aquafx-0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/olofro/Downloads/aquafx-0.1-complete/aquafx-0.1-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/olofro/Downloads/aquafx-0.1-complete/aquafx-0.1-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/olofro/Downloads/flatter-0.7 (1).jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

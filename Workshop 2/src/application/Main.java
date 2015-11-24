@@ -18,6 +18,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import com.aquafx_project.AquaFx;
+
 import Database.BoatDAO;
 import Database.DB;
 import Database.MemberDAO;
@@ -190,6 +192,8 @@ public class Main extends Application {
 		 List<Member> list = new ArrayList<>();
 	        list.addAll(DB.members().findAll());
 	        System.out.println(list.size());
+	        AquaFx.style();
+	        
 		for (Member event: list){
 			System.out.println("members id is" +event.id);
 			
