@@ -14,6 +14,5 @@
    <property name="hibernate.current_session_context_class">thread</property>
       <mapping class="model.Boat"/>
       <mapping class="model.Member" />
-       
-   </session-factory>
+        </session-factory>
 </hibernate-configuration>

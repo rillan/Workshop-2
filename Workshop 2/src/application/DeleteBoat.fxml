@@ -31,6 +31,7 @@
                </light>
             </Lighting>
          </effect></Button>
+      <TextField fx:id="deleteMember" layoutX="14.0" layoutY="40.0" promptText="Enter memberid" text="Enter memberid" />
    </children>
    <effect>
       <Glow level="0.15" />

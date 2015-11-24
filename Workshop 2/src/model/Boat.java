@@ -1,11 +1,13 @@
 	package model;
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import model.Member;
@@ -25,13 +27,15 @@ public class Boat implements Serializable {
 	@Column(name = "id")
     public long id;
     
-	String type;
-	int length;
+	public String type;
+	public int length;
 	
+	public long memberID;
 	
-	public Boat(String type, int length){
+	public Boat(String type, int length, long memberID){
 		this.type =type;
 		this.length = length;
+		this.memberID = memberID;
 	}
 	public Boat() {
 		

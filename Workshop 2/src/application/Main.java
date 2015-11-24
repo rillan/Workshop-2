@@ -73,6 +73,8 @@ public class Main extends Application {
 	    @FXML
 	    private Button create;
 	    @FXML
+	    private Button changeBoat;
+	    @FXML
 	     MemberController memberControll = new MemberController();
 	    
 	    
@@ -190,15 +192,38 @@ public class Main extends Application {
 	        System.out.println(list.size());
 		for (Member event: list){
 			System.out.println("members id is" +event.id);
+			
+	        System.out.println(list.size());
+		}
+		List<Boat> listBoat = new ArrayList<>();
+		listBoat.addAll(DB.boats().findAll());
+		for (Boat boat: listBoat){
+			System.out.println("Boats id is" +boat.id);
 		}
 		root = loader.load();
 		 Scene scene = new Scene(root);
     		primaryStage.setTitle("Workshop 2");
 			primaryStage.setScene(scene);
 			primaryStage.show();
-			
+		
 		}
 
+	@FXML
+	public void updateBoat(ActionEvent event) throws IOException{
+		
+		Parent root = null;
+   	 if(event.getSource()== changeBoat){
+   	 FXMLLoader loader = new FXMLLoader(Main.class.getResource("UpdateBoat.fxml"));
+   	 
+   	  root = (Parent) loader.load();
+    }
+   	 Scene scene = new Scene(root);
+   	 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+   	 stage.setScene(scene);
+   	 stage.setTitle("Update a Boat");
+   	 stage.show();
+        
+        }
 	@FXML
 	public void showCompose(ActionEvent event) throws IOException{
 		
@@ -215,6 +240,7 @@ public class Main extends Application {
    	 stage.show();
         
         }
+		  
 		  
 		  
 		 
@@ -267,7 +293,10 @@ public class Main extends Application {
 	         session.close(); 
 	      }
 	   }
-	
+	 @Override
+	    public void stop() {
+	        DB.closeSessionFactory();
+	    }
 	public long getId() { return id; }
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub

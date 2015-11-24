@@ -1,7 +1,11 @@
 package application;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
+
+import org.hibernate.Session;
 
 import Database.DB;
 import javafx.event.ActionEvent;
@@ -19,22 +23,26 @@ import model.Member;
 public class BoatController {
 	public Boat boat ;
 	 public Member member;
+	 
 	@FXML
 	Button deleteOk;
 	@FXML
 	private TextField deleteTextField;
-	
+	 @FXML
+	    private TextField deleteMember;
 	 @FXML
 	    private TextField memberIDBoat;
 	 @FXML
 	    private TextField newBoat;
+	 @FXML
+	    private TextField updateMemberBoat;
 
 	    @FXML
 	    private Button returnBoat;
 	Pattern patternA = Pattern.compile("[a-zA-Z]+");
 	
 	Pattern patternD = Pattern.compile("[0-9]+");
-	Pattern boatType = Pattern.compile("Kayak"+"Canoe"+"Motorboat"+"Other");
+	Pattern boatType = Pattern.compile("Kayak|Canoe|Motorboat|Other");
 	@FXML
 	private String alphabet = patternA.toString() ;
 	@FXML
@@ -57,20 +65,38 @@ public class BoatController {
 
 	    @FXML
 	    private TextField boatID;
+	   
 	
 	
 	@FXML
     private void updateBoat(ActionEvent event)throws IOException{
-		if(boatID.getText().matches(numbers) && updateBoatLength.getText().matches(numbers) && updateBoatType.getText().matches(boatString) ){
+		if(boatID.getText().matches(numbers) && updateBoatLength.getText().matches(numbers) && updateBoatType.getText().matches(boatString)   ){
 	    	String test = boatID.getText();
 	    	Long id = Long.parseLong(test);
 	    	System.out.println("ths is id"+ id);
+	    	boat = (Boat) DB.boats().findById(id);
+//	    	System.out.println(boat.type);
 	    	String newLength = updateBoatLength.getText();
 	    	int convertedLength = Integer.parseInt(newLength);
 	    	String newType = updateBoatType.getText();
-	    	boat = (Boat) DB.boats().findById(id);
-	    	boat = new Boat(newType,convertedLength);
-		}
+	    	String updateMemberID = updateMemberBoat.getText();
+	    	Long memberId = Long.parseLong(updateMemberID);
+	    	member = (Member) DB.members().findById(memberId);
+	    	ArrayList<Boat> list = new ArrayList<Boat>();
+	    	if(member.listofBoats.contains(boat)){
+	    		member.listofBoats.remove(boat);
+	    		member.numberOfBoats --;
+	    		System.out.println(member.listofBoats.size());
+	    	}
+	    	DB.boats().delete(boat);
+	    	boat = new Boat(newType,convertedLength,member.id);
+	    	member.registerBoat(boat);
+	    	DB.boats().save(boat);
+	    	
+	    	
+	    	
+	    	
+	}
 		else
     		error.setVisible(true);
 	}
@@ -91,8 +117,9 @@ public class BoatController {
     	String sailboat = "Sailboat";
     	String other = "Other";
     	if(boatname.matches(kayak)|| boatname.matches(motorboat) || boatname.matches(sailboat) || boatname.matches(other)  ){
-        	member.registerBoat(boatname, length);
-        	Boat boatToAdd = new Boat(boatname,length);
+        	
+        	Boat boatToAdd = new Boat(boatname,length,member.id);
+        	member.registerBoat(boatToAdd);
        	DB.boats().save(boatToAdd);
     	}
 	}
@@ -112,14 +139,30 @@ public class BoatController {
     }
 	@FXML
 	 private void deleteBoat(ActionEvent event) throws IOException{
-		 if(deleteTextField.getText().matches(numbers)){
-    	String test = deleteTextField.getText();
-    	Long id = Long.parseLong(test);
-    	System.out.println("ths is id"+ id);
-    	boat = (Boat) DB.boats().findById(id);
-    	
-        DB.boats().delete(boat);
-        id =null;
+		
+		 	 if(deleteTextField.getText().matches(numbers) && deleteMember.getText().matches(numbers) ){
+			    	String test = deleteTextField.getText();
+			    	String memberID = deleteMember.getText();
+			    	Long memberId = Long.parseLong(memberID);
+			    	member = (Member) DB.members().findById(memberId);
+			    	System.out.println("Removes a boat " + member.name);
+			    	Long id = Long.parseLong(test);
+			    	System.out.println("ths is id "+ id);
+			    	boat = (Boat) DB.boats().findById(id);	    	
+			    	if(boat.memberID == member.id){
+			     		member.numberOfBoats--;
+			    		
+			   	}	
+			        DB.boats().delete(boat);
+			        member.listofBoats.clear();
+			       
+			     List<Boat> boatsToAdd = DB.boats().findAll();
+			     for(Boat boats : boatsToAdd ){
+			    	 if(boats.memberID == member.id){
+			    		 member.listofBoats.add(boats);
+			    	 }
+			     }
+
         }
 		 else{
 			 System.out.println("Enter a number");

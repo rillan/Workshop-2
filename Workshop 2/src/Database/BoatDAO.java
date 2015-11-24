@@ -25,17 +25,13 @@ public class BoatDAO implements databaseInterface<Boat> {
 
 	@Override
 	public void delete(Boat entity) {
-		Transaction transaction = null;
 	
-		try{
-	
-		transaction = session.beginTransaction();
+		Transaction transaction = session.beginTransaction();
+		
 		session.delete(entity);
 		transaction.commit();
-		}catch (RuntimeException e) {
-	        transaction.rollback();
-	        throw e;
-		}
+		
+		
 	}
 
 	@Override

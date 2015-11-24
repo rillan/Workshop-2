@@ -2,12 +2,16 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import Database.DB;
@@ -32,10 +36,17 @@ public class Member implements Iterator<Member> {
 	@Column(name = "numberOfBoats")
 	public int numberOfBoats = 0; 
 	@Column(name = "listofBoats")
+	
 	public ArrayList <Boat> listofBoats = new ArrayList<Boat>();
 	
 	public Member(){
 		
+	}
+	public void removeBoat(long memberid, long boatID){
+		Member member = DB.members().findById(memberid);
+		Boat boat = (Boat)DB.boats().findById(boatID);
+		
+			member.listofBoats.remove(boat);
 	}
 	
 	public Member(String name, String personNumber){
@@ -60,7 +71,7 @@ public class Member implements Iterator<Member> {
 		String info = "";
 		
 		for(Boat boat:listofBoats ){
-		info += "Boattype "+boat.type +" Boatlength"+ boat.length+ ", ";
+		info += "Boattype " +boat.type +" Boatlength "+ boat.length+ ", " +"Boatid " + boat.id;
 		
 		}
 		
@@ -81,25 +92,21 @@ public class Member implements Iterator<Member> {
 		this.name = name;
 		this.personNumber = personNumber;
 	}
-	public void registerBoat(String type,int length){
-		Boat boat = new Boat();
-		boat.type = type;
+	public void registerBoat(Boat boat){
 		
-		boat.length = length;
 		this.numberOfBoats =numberOfBoats+1;
 		this.listofBoats.add(boat);
 		
 	}
-	public void deleteBoat(long id){
-		DB.boats().findById(id);
-		
-		
-	}
+	
 
 	@Override
 	public boolean hasNext() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	public long getId(){
+		return this.id;
 	}
 
 	@Override

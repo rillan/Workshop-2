@@ -174,8 +174,9 @@ public class MemberController implements Initializable {
     	String sailboat = "Sailboat";
     	String other = "Other";
     	if(boatname.matches(kayak)|| boatname.matches(motorboat) || boatname.matches(sailboat) || boatname.matches(other)  ){
-    	member.registerBoat(boatname, length);
-    	Boat boatToAdd = new Boat(boatname,length);
+    	
+    	Boat boatToAdd = new Boat(boatname,length,member.id);
+    	member.registerBoat(boatToAdd);
    	DB.boats().save(boatToAdd);
     	member.updateMember(name,newPersonNumber);
     	}
