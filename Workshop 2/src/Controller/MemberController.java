@@ -193,12 +193,23 @@ public class MemberController implements Initializable {
     }
    @FXML
    public void showMember(ActionEvent event)throws IOException{
-   	String theID = memberID.getText();
+	   try
+       {
+	String theID = memberID.getText();
+   	
 	Long id = Long.parseLong(theID);
 	member = (Member) DB.members().findById(id);
-   	singleInformation.add(member.getCompose(member));
+	
+   	singleInformation.add(member.getVerbose(member));
    	oneMember.setItems(singleInformation);
    	oneMember.setVisible(true);
+   	
+       }
+	catch(NullPointerException  | NumberFormatException t ){
+		
+		System.out.println("No member with that id");
+	}
+       
    }
    
    // Method to return to main stage
@@ -219,28 +230,28 @@ public class MemberController implements Initializable {
 	    // Method to show the compose list
 	    
 	    @FXML
-		public void showCompose(){
+		public void showVerbose(){
 			
 	        List<Member> list = new ArrayList<>();
 	        list.addAll(DB.members().findAll());
 	        for (Member event : list) { //for better performance
-				composeInformation.add(event.getCompose(event));
-	        	composeList.setItems(composeInformation);
-				composeList.setVisible(true);
+				verboseInformation.add(event.getVerbose(event));
+	        	verboseList.setItems(verboseInformation);
+				verboseList.setVisible(true);
 	        }
 	    }
 	    
 	    // Method to show the verboselist
 	    
 	    @FXML
-		public void showVerbose(){
+		public void showCompose(){
 			
 	        List<Member> list = new ArrayList<>();
 	        list.addAll(DB.members().findAll());
 	        for (Member event : list) { //for better performance
-	        	verboseInformation.add(event.getVerbose());
-	        	verboseList.setItems(verboseInformation);
-	        	verboseList.setVisible(true);
+	        	composeInformation.add(event.getCompose());
+	        	composeList.setItems(composeInformation);
+	        	composeList.setVisible(true);
 	        	
 	        }
 			  }

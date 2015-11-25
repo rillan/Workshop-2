@@ -25,7 +25,6 @@
 	<classpathentry kind="lib" path="C:/Users/olofro/git/Workshop-2/Workshop 2/src/lib/jboss-logging-annotations-1.2.0.Beta1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/olofro/git/Workshop-2/Workshop 2/src/lib/jboss-transaction-api_1.2_spec-1.0.0.Final.jar"/>
 	<classpathentry kind="lib" path="C:/Users/olofro/git/Workshop-2/Workshop 2/src/lib/junit-4.12.jar"/>
-	<classpathentry kind="lib" path="C:/Users/olofro/git/Workshop-2/Workshop 2/src/lib/sqlite-jdbc-3.8.7.jar"/>
 	<classpathentry kind="lib" path="C:/Users/olofro/git/Workshop-2/Workshop 2/src/lib/controlsfx-8.20.8/controlsfx-8.20.8.jar"/>
 	<classpathentry kind="lib" path="C:/Users/olofro/git/Workshop-2/Workshop 2/src/lib/controlsfx-8.20.8/controlsfx-samples-8.20.8.jar"/>
 	<classpathentry kind="lib" path="C:/Users/olofro/git/Workshop-2/Workshop 2/src/lib/controlsfx-8.20.8/fxsampler-1.0.8.jar"/>
@@ -42,5 +41,9 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/olofro/Desktop/mysql-connector-java-5.1.37-bin.jar"/>
+	<classpathentry kind="lib" path="C:/Users/olofro/Downloads/aquafx-0.1-complete/aquafx-0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/olofro/Downloads/aquafx-0.1-complete/aquafx-0.1-javadoc.jar"/>
+	<classpathentry kind="lib" path="C:/Users/olofro/Downloads/aquafx-0.1-complete/aquafx-0.1-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/olofro/Downloads/flatter-0.7.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

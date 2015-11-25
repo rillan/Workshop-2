@@ -61,12 +61,12 @@ public class Member implements Iterator<Member> {
 	
 
 	
-	public  String getVerbose(){
-		return name +" " + personNumber +" "+ numberOfBoats;
+	public  String getCompose(){
+		return "Name:"+name +" " +"Personnumber:"+ personNumber +" Number of Boats" + numberOfBoats;
 		
 	}
 	
-	public  String getCompose(Member member){
+	public  String getVerbose(Member member){
 		if(member.listofBoats.size() > 0){
 		String info = "";
 		
@@ -75,10 +75,10 @@ public class Member implements Iterator<Member> {
 		
 		}
 		
-		return "Memberinformation "+ member.id +" " +member.name +" " + member.personNumber +"\n Boatinformation "+ numberOfBoats+" "+ info ;
+		return "Membername: "+ member.name +" Personnumber: " +member.personNumber +" Id: " + member.id +"\n Boatinformation "+ numberOfBoats+" "+ info ;
 		}
 		else{
-			return "Memberinformation" +name +" " + personNumber + " Has 0 boats";
+			return "Membername: " +name +"Personnumber: " + personNumber + "Id: "+member.id+ "Has 0 boats";
 		}
 	}
 	

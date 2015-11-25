@@ -18,6 +18,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+import com.aquafx_project.AquaFx;
+import com.guigarage.flatterfx.FlatterFX;
+
 import Controller.MemberController;
 import Database.BoatDAO;
 import Database.DB;
@@ -195,6 +198,7 @@ public class Main extends Application {
 		 List<Member> list = new ArrayList<>();
 	        list.addAll(DB.members().findAll());
 	        System.out.println(list.size());
+	        AquaFx.style();
 		for (Member event: list){
 			System.out.println("members id is" +event.id);
 			
@@ -234,7 +238,7 @@ public class Main extends Application {
 		
 		Parent root = null;
    	 if(event.getSource()== compose){
-   	 FXMLLoader loader = new FXMLLoader(Main.class.getResource("composeView.fxml"));
+   	 FXMLLoader loader = new FXMLLoader(Main.class.getResource("compactView.fxml"));
    	 
    	  root = (Parent) loader.load();
     }
