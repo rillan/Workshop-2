@@ -7,7 +7,7 @@
 
 <AnchorPane prefHeight="465.0" prefWidth="625.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MemberController">
    <children>
-      <Button fx:id="composeListButton" layoutX="14.0" layoutY="127.0" mnemonicParsing="false" onAction="#showCompose" text="Compose List" />
+      <Button fx:id="composeListButton" layoutX="14.0" layoutY="127.0" mnemonicParsing="false" onAction="#showCompose" text="Compact List" />
       <Button fx:id="composeReturn" layoutX="120.0" layoutY="127.0" mnemonicParsing="false" onAction="#cancel" text="Return" />
       <ListView fx:id="composeList" layoutX="193.0" layoutY="27.0" prefHeight="379.0" prefWidth="399.0" visible="false" />
    </children>

@@ -13,6 +13,5 @@
       <TextField fx:id="updateName" layoutX="14.0" layoutY="47.0" prefHeight="25.0" prefWidth="194.0" promptText="Enter a new Name" />
       <TextField fx:id="personNumber" layoutX="14.0" layoutY="83.0" prefHeight="25.0" prefWidth="194.0" promptText="Enter a new PersonNumber" />
       <TextField fx:id="boatInfo" layoutX="14.0" layoutY="108.0" promptText="Boatname and Length" />
-      <TextField fx:id="error" layoutX="14.0" layoutY="140.0" text="Something is wrong" visible="false" />
    </children>
 </AnchorPane>

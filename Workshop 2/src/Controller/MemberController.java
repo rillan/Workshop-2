@@ -132,7 +132,7 @@ public class MemberController implements Initializable {
 	    public void addMember(ActionEvent event)throws IOException{
 	    	
 	    	if(name.getText().matches(alphabet)&& personnumber.getText().matches(numbers)){
-	    		
+	    		try{
 	    		Member newMember = new Member(name.getText(),personnumber.getText());
 	    		System.out.println(newMember.name + newMember.personNumber);
 	    		DB.members().save(newMember);
@@ -148,9 +148,14 @@ public class MemberController implements Initializable {
 	        	
 	    	    	}
 	    	
-	    	else{
-	    		errrortext.setVisible(true);
+	    		catch (IllegalArgumentException | NullPointerException e){
+	    			System.out.println("The information provided is incorrect. Please try again");
 	    	}
+	    	
+	    		}
+	    		else{
+	    			System.out.println("The information provided is incorrect. Please try again");
+	    		}
 	    }	
 
 	    
@@ -159,7 +164,7 @@ public class MemberController implements Initializable {
     @FXML
     private void updateMember(ActionEvent event)throws IOException{
    	if(ID.getText().matches(numbers) && updateName.getText().matches(alphabet) && personNumber.getText().matches(numbers) && boatInfo.getText().matches(boat)   ){
-    		
+    		try{
     	String memberID = ID.getText();
     	Long id = Long.parseLong(memberID);
     	member = (Member) DB.members().findById(id);
@@ -183,16 +188,20 @@ public class MemberController implements Initializable {
    	DB.boats().save(boatToAdd);
     	member.updateMember(name,newPersonNumber);
     	}
-    	
- 	
-    	}
-    	else
-    		error.setVisible(true);
-   		
+    		}
+    	catch (IllegalArgumentException | NullPointerException e){
+			System.out.println("The information provided is incorrect. Please try again");
+	}
+	
+		}
+		else{
+			System.out.println("The information provided is incorrect. Please try again");
+		}
     // Method for showing a single members information
     }
    @FXML
    public void showMember(ActionEvent event)throws IOException{
+	   if(memberID.getText().matches(numbers)){
 	   try
        {
 	String theID = memberID.getText();
@@ -205,10 +214,14 @@ public class MemberController implements Initializable {
    	oneMember.setVisible(true);
    	
        }
-	catch(NullPointerException  | NumberFormatException t ){
-		
-		System.out.println("No member with that id");
+	   catch (IllegalArgumentException | NullPointerException e){
+			System.out.println("The information provided is incorrect. Please try again");
 	}
+	
+		}
+		else{
+			System.out.println("The information provided is incorrect. Please try again");
+		}
        
    }
    
@@ -267,16 +280,24 @@ public class MemberController implements Initializable {
 	// Method to delete a member
 	 @FXML
      private void deleteMember(ActionEvent event) throws IOException{
+		 
 		 if(deleteTextField.getText().matches(numbers)){
+			 try{
     	String test = deleteTextField.getText();
     	Long id = Long.parseLong(test);
     	member = (Member) DB.members().findById(id);
         DB.members().delete(member);
         id =null;
         }
-		 else{
-			 System.out.println("Enter a number");
-	 }
+		 
+		 catch (IllegalArgumentException | NullPointerException e){
+				System.out.println("The information provided is incorrect. Please try again");
+		}
+		
+			}
+			else{
+				System.out.println("The information provided is incorrect. Please try again");
+			}
      }
 	
 }

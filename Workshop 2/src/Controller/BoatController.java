@@ -83,7 +83,9 @@ public class BoatController implements Initializable  {
 	//	Method for updating a members boat
 	@FXML
 	private void updateBoat(ActionEvent event)throws IOException{
+		
 		if(boatID.getText().matches(numbers) && updateBoatLength.getText().matches(numbers) && updateBoatType.getText().matches(boatString)   ){
+			try{
 			String theBoatsID = boatID.getText();
 			Long id = Long.parseLong(theBoatsID);
 			System.out.println("ths is id"+ id);
@@ -110,8 +112,14 @@ public class BoatController implements Initializable  {
 
 
 		}
-		else
-			error.setVisible(true);
+		
+		catch(NumberFormatException | NullPointerException e){
+			System.out.println("The information provided is incorrect. Please try again");
+		}
+		}
+		else{
+			System.out.println("The information provided is incorrect. Please try again");
+		}
 	}
 	@Override
 	  public void initialize(URL url, ResourceBundle rb) {
@@ -121,16 +129,19 @@ public class BoatController implements Initializable  {
 
 	@FXML
 	private void registerBoat(ActionEvent event)throws IOException{
+		if(newBoat.getText().matches(numbers) && memberIDBoat.getText().matches(numbers)){
+		try{
 		String memberID = memberIDBoat.getText();
 		Long id = Long.parseLong(memberID);
 		member = (Member) DB.members().findById(id);
-		System.out.println(newBoat.getText());
-		String boatsType = (newBoat.getText());
-		String modifyBoatType = boatsType.replaceAll("[^a-zA-Z0-9]", "");
+		
+		String boatsLength = (newBoat.getText());
+		
+		String modifyBoatType = boatsLength.replaceAll("[^a-zA-Z0-9]", "");
 
 		String[]boat = modifyBoatType.split("(?<=\\D)(?=\\d)");
 		String boatname = list.getSelectionModel().getSelectedItem();
-		if(boatsType.matches(numbers)){
+		
 		int length = Integer.parseInt(boat[0]);
 		
 		
@@ -138,6 +149,16 @@ public class BoatController implements Initializable  {
 			Boat boatToAdd = new Boat(boatname,length,member.id);
 			member.registerBoat(boatToAdd);
 			DB.boats().save(boatToAdd);
+		}
+		
+		
+	catch (IllegalArgumentException | NullPointerException e){
+			System.out.println("The information provided is incorrect. Please try again");
+	}
+	
+		}
+		else{
+			System.out.println("The information provided is incorrect. Please try again");
 		}
 	}
 
@@ -160,8 +181,9 @@ public class BoatController implements Initializable  {
 	// Method to delete a boat
 	@FXML
 	private void deleteBoat(ActionEvent event) throws IOException{
-
+		
 		if(deleteTextField.getText().matches(numbers) && deleteMember.getText().matches(numbers) ){
+			try{
 			String theBoatToDelete = deleteTextField.getText();
 			String memberID = deleteMember.getText();
 			Long memberId = Long.parseLong(memberID);
@@ -182,15 +204,21 @@ public class BoatController implements Initializable  {
 					member.listofBoats.add(boats);
 				}
 			}
-
 		}
-		else{
-			System.out.println("Enter a number");
-		}
+		
+		catch (IllegalArgumentException | NullPointerException e){
+			System.out.println("The information provided is incorrect. Please try again");
 	}
-	
+		}
+		
+		else{
+			System.out.println("The information provided is incorrect. Please try again");
+		}
+		
+	}
+}	
 		
 		
-	  }
+	  
 	
 
