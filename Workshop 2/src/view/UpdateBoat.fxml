@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="281.0" prefWidth="346.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.BoatController">
+<AnchorPane prefHeight="281.0" prefWidth="346.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BoatController">
    <children>
       <Button fx:id="UpdateBoat" layoutX="21.0" layoutY="226.0" mnemonicParsing="false" onAction="#updateBoat" text="Update" />
       <Button layoutX="163.0" layoutY="226.0" mnemonicParsing="false" onAction="#cancel" text="Return" />

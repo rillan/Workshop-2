@@ -1,4 +1,4 @@
-package application;
+package view;
 	
 import java.io.IOException;
 import java.net.URL;
@@ -18,16 +18,18 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-import com.aquafx_project.AquaFx;
-
+import Controller.MemberController;
 import Database.BoatDAO;
 import Database.DB;
 import Database.MemberDAO;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import javassist.tools.reflect.Loader;
 import model.Boat;
 import model.Member;
 import javafx.scene.Node;
@@ -156,13 +158,14 @@ public class Main extends Application {
 	    
 	    @FXML
 	     private void registerBoat(ActionEvent event) throws IOException{
-	    	
+	    		
 	    	 Parent root = null;
 	    	 if(event.getSource()== registerBoat){
 	    	 FXMLLoader loader = new FXMLLoader(Main.class.getResource("RegisterBoat.fxml"));
 	    	 
 	    	  root = (Parent) loader.load();
 	     }
+	    	 
 	    	 Scene scene = new Scene(root);
 	    	 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 	    	 stage.setScene(scene);
@@ -192,8 +195,6 @@ public class Main extends Application {
 		 List<Member> list = new ArrayList<>();
 	        list.addAll(DB.members().findAll());
 	        System.out.println(list.size());
-	        AquaFx.style();
-	        
 		for (Member event: list){
 			System.out.println("members id is" +event.id);
 			

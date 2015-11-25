@@ -1,4 +1,4 @@
-package application;
+package Controller;
 
 
 import java.io.IOException;
@@ -34,6 +34,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.Boat;
 import model.Member;
+import view.Main;
 
 public class MemberController implements Initializable {
 	private static DB db;

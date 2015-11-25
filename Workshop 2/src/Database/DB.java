@@ -5,9 +5,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
-import application.Main;
 import javafx.fxml.FXML;
 import model.Member;
+import view.Main;
 
 public class DB {
 

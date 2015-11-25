@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="129.0" prefWidth="211.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.BoatController">
+<AnchorPane prefHeight="129.0" prefWidth="211.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.BoatController">
    <children>
       <TextField fx:id="deleteTextField" promptText="Enter id to delete" text="Enter id to delete" />
       <Button fx:id="deleteOk" layoutX="6.0" layoutY="103.0" mnemonicParsing="false" onAction="#deleteBoat" text="Ok">

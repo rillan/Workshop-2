@@ -1,26 +1,33 @@
-package application;
+package Controller;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
 import org.hibernate.Session;
 
 import Database.DB;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.Boat;
 import model.Member;
+import view.Main;
 
-public class BoatController {
+public class BoatController implements Initializable  {
 	public Boat boat ;
 	public Member member;
 
@@ -65,8 +72,14 @@ public class BoatController {
 
 	@FXML
 	private TextField boatID;
-
-
+	
+	@FXML
+	private static ObservableList<String> items =FXCollections.observableArrayList (
+		    "Kayak/canoe", "Other", "Motorsailer", "Sailboat");
+	@FXML
+	public
+	ListView<String> list = new ListView<String>();
+	
 	//	Method for updating a members boat
 	@FXML
 	private void updateBoat(ActionEvent event)throws IOException{
@@ -100,7 +113,10 @@ public class BoatController {
 		else
 			error.setVisible(true);
 	}
-
+	@Override
+	  public void initialize(URL url, ResourceBundle rb) {
+		 list.setItems(items);
+	  }
 	//	Method for adding a boat
 
 	@FXML
@@ -108,18 +124,16 @@ public class BoatController {
 		String memberID = memberIDBoat.getText();
 		Long id = Long.parseLong(memberID);
 		member = (Member) DB.members().findById(id);
-
+		System.out.println(newBoat.getText());
 		String boatsType = (newBoat.getText());
 		String modifyBoatType = boatsType.replaceAll("[^a-zA-Z0-9]", "");
 
 		String[]boat = modifyBoatType.split("(?<=\\D)(?=\\d)");
-		String boatname = boat[0];
-		int length = Integer.parseInt(boat[1]);
-		String kayak = "Kayak";
-		String motorboat ="Motorboat";
-		String sailboat = "Sailboat";
-		String other = "Other";
-		if(boatname.matches(kayak)|| boatname.matches(motorboat) || boatname.matches(sailboat) || boatname.matches(other)  ){
+		String boatname = list.getSelectionModel().getSelectedItem();
+		if(boatsType.matches(numbers)){
+		int length = Integer.parseInt(boat[0]);
+		
+		
 
 			Boat boatToAdd = new Boat(boatname,length,member.id);
 			member.registerBoat(boatToAdd);
@@ -174,4 +188,9 @@ public class BoatController {
 			System.out.println("Enter a number");
 		}
 	}
-}
+	
+		
+		
+	  }
+	
+

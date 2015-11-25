@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="215.0" prefWidth="272.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MemberController">
+<AnchorPane prefHeight="215.0" prefWidth="272.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MemberController">
    <children>
       <Button fx:id="UpdateMember" layoutX="14.0" layoutY="171.0" mnemonicParsing="false" onAction="#updateMember" text="Update" />
       <Button layoutX="163.0" layoutY="171.0" mnemonicParsing="false" onAction="#cancel" text="Return" />
