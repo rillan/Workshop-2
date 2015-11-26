@@ -62,7 +62,7 @@ public class Member implements Iterator<Member> {
 
 	
 	public  String getCompose(){
-		return "Name:"+name +" " +"Personnumber:"+ personNumber +" Number of Boats" + numberOfBoats;
+		return "Name: "+name +" " +"Personnumber: "+ personNumber +" Number of Boats: " + numberOfBoats;
 		
 	}
 	

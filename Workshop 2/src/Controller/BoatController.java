@@ -30,7 +30,10 @@ import view.Main;
 public class BoatController implements Initializable  {
 	public Boat boat ;
 	public Member member;
-
+	
+	
+	@FXML
+    private ListView<String> boatSelector = new ListView<String>();
 	@FXML
 	Button deleteOk;
 	@FXML
@@ -84,16 +87,17 @@ public class BoatController implements Initializable  {
 	@FXML
 	private void updateBoat(ActionEvent event)throws IOException{
 		
-		if(boatID.getText().matches(numbers) && updateBoatLength.getText().matches(numbers) && updateBoatType.getText().matches(boatString)   ){
+		if(boatID.getText().matches(numbers) && updateBoatLength.getText().matches(numbers) )   {
 			try{
 			String theBoatsID = boatID.getText();
 			Long id = Long.parseLong(theBoatsID);
 			System.out.println("ths is id"+ id);
 			boat = (Boat) DB.boats().findById(id);
-
+			
+			String newType = boatSelector.getSelectionModel().getSelectedItem();
 			String boatsNewLength = updateBoatLength.getText();
 			int convertedLength = Integer.parseInt(boatsNewLength);
-			String newType = updateBoatType.getText();
+			
 			String updateMemberID = updateMemberBoat.getText();
 			Long memberId = Long.parseLong(updateMemberID);
 			member = (Member) DB.members().findById(memberId);
@@ -124,6 +128,7 @@ public class BoatController implements Initializable  {
 	@Override
 	  public void initialize(URL url, ResourceBundle rb) {
 		 list.setItems(items);
+		 boatSelector.setItems(items);
 	  }
 	//	Method for adding a boat
 
