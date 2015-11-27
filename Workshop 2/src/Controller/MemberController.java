@@ -277,16 +277,18 @@ public class MemberController implements Initializable {
        
    }
    
+   
+   
    // Method to return to main stage
 	    @FXML
 	    private void cancel(ActionEvent event)throws IOException{
 	    	Parent root = null;
-	    	FXMLLoader loader = new FXMLLoader(Main.class.getResource("Start.fxml"));
+	    	FXMLLoader loader = new FXMLLoader(Main.class.getResource("Editmode.fxml"));
 	    	root = (Parent) loader.load();
 	     
 	    	 Scene scene = new Scene(root);
 	    	 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-	    	 stage.setTitle("Workshop 2");
+	    	 stage.setTitle("Member Registry Editing Mode");
 	    	 stage.setScene(scene);
 	    	 stage.show();
 	    	 
