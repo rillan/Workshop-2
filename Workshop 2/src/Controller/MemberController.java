@@ -6,6 +6,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
@@ -72,11 +73,22 @@ public class MemberController implements Initializable {
 	Pattern patternA = Pattern.compile("[a-zA-Z]+");
 	Pattern patternB = Pattern.compile("[A-Za-z0-9,]+");
 	Pattern patternD = Pattern.compile("[0-9]+");
+	Pattern pattern31day = Pattern.compile("^((19|20)\\d\\d(0?[13578]|1[02])(0?[1-9]|[12][0-9]|3[01])([\\-])([\\d]{4})$)");
+	Pattern pattern30day = Pattern.compile("^((19|20)\\d\\d(0?[469]|1[1])(0?[1-9]|[12][0-9]|3[0])([\\-])([\\d]{4})$)");
+	Pattern pattern28day = Pattern.compile("^((19|20)\\d\\d(0?[2])(0?[1-9]|[1][0-9]|2[0-8])([\\-])([\\d]{4})$)");
+	Pattern patternLeapYear = Pattern.compile("^((19|20)\\d\\d(0?[2])(0?[1-9]|[1][0-9]|2[0-9])([\\-])([\\d]{4})$)");
 	@FXML
 	private String alphabet = patternA.toString() ;
 	@FXML
 	private String numbers = patternD.toString();
-	
+	@FXML
+	private String pn31day = pattern31day.toString();
+	@FXML
+	private String pn30day = pattern30day.toString();
+	@FXML
+	private String pn28day = pattern28day.toString();
+	@FXML
+	private String pn29day = patternLeapYear.toString();
 	@FXML
 	private String boat = patternB.toString();
 	
@@ -130,13 +142,19 @@ public class MemberController implements Initializable {
 	   
 	    @FXML
 	    public void addMember(ActionEvent event)throws IOException{
-	    	
-	    	if(name.getText().matches(alphabet)&& personnumber.getText().matches(numbers)){
+	    	GregorianCalendar cal = new GregorianCalendar();
+	    	String leapYear = personnumber.getText(0, 4);
+	    	int yearToCalculate = Integer.parseInt(leapYear);
+	    	cal.isLeapYear(yearToCalculate);
+	    	if(cal.isLeapYear(yearToCalculate)){
+	    	if(name.getText().matches(alphabet)&& personnumber.getText().matches(pn29day) || personnumber.getText().matches(pn30day) || personnumber.getText().matches(pn31day)){
 	    		try{
 	    		Member newMember = new Member(name.getText(),personnumber.getText());
 	    		System.out.println(newMember.name + newMember.personNumber);
 	    		DB.members().save(newMember);
 	    		
+	    			
+	    			
 	    		Parent root = null;
 	    		
 	        	FXMLLoader loader = new FXMLLoader(Main.class.getResource("Start.fxml"));
@@ -157,8 +175,36 @@ public class MemberController implements Initializable {
 	    			System.out.println("The information provided is incorrect. Please try again");
 	    		}
 	    }	
-
-	    
+	    	else
+	    		if(name.getText().matches(alphabet)&& personnumber.getText().matches(pn28day) || personnumber.getText().matches(pn30day) || personnumber.getText().matches(pn31day)){
+		    		try{
+		    		Member newMember = new Member(name.getText(),personnumber.getText());
+		    		System.out.println(newMember.name + newMember.personNumber);
+		    		DB.members().save(newMember);
+		    		
+		    			
+		    			
+		    		Parent root = null;
+		    		
+		        	FXMLLoader loader = new FXMLLoader(Main.class.getResource("Start.fxml"));
+		        	root = (Parent) loader.load();
+		       	 Scene scene = new Scene(root);
+		        	 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		        	 stage.setScene(scene);
+		        	 stage.show();
+		        	
+		    	    	}
+		    	
+		    		catch (IllegalArgumentException | NullPointerException e){
+		    			System.out.println("The information provided is incorrect. Please try again");
+		    	}
+		    	
+		    		}
+		    		else{
+		    			System.out.println("The information provided is incorrect. Please try again");
+		    		}
+		    }	
+	     
 	    // Method for updating a member
 
     @FXML
@@ -188,6 +234,7 @@ public class MemberController implements Initializable {
    	DB.boats().save(boatToAdd);
     	member.updateMember(name,newPersonNumber);
     	}
+    	
     		}
     	catch (IllegalArgumentException | NullPointerException e){
 			System.out.println("The information provided is incorrect. Please try again");
@@ -199,6 +246,11 @@ public class MemberController implements Initializable {
 		}
     // Method for showing a single members information
     }
+    
+   
+    	
+    
+    
    @FXML
    public void showMember(ActionEvent event)throws IOException{
 	   if(memberID.getText().matches(numbers)){
