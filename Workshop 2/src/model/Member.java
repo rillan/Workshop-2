@@ -88,9 +88,9 @@ public class Member implements Iterator<Member> {
 	
 	
 	
-	public void updateMember(String name, String personNumber){
+	public void updateMember(String name){
 		this.name = name;
-		this.personNumber = personNumber;
+		
 	}
 	public void registerBoat(Boat boat){
 		

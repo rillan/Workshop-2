@@ -26,6 +26,6 @@
       <Button fx:id="registerBoat" mnemonicParsing="false" onAction="#registerBoat" text="Register Boat" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <Button fx:id="changeBoat" mnemonicParsing="false" onAction="#updateBoat" text="Change Boat info" GridPane.columnIndex="3" GridPane.rowIndex="1" />
       <Button fx:id="singleMemberButton" mnemonicParsing="false" onAction="#showOneMember" text="Single member information" />
-      <Button fx:id="returnFirstPage" layoutX="10.0" layoutY="331.0" mnemonicParsing="false" onAction="#returnToLogin" text="Return  to login page" GridPane.columnIndex="3" />
+      <Button fx:id="returnLogin" layoutX="10.0" layoutY="331.0" mnemonicParsing="false" onAction="#returnToLogin" text="Return  to login page" GridPane.columnIndex="3" />
    </children>
 </GridPane>

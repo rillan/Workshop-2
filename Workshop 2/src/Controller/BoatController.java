@@ -171,7 +171,7 @@ public class BoatController implements Initializable  {
 	@FXML
 	private void cancel(ActionEvent event)throws IOException{
 		Parent root = null;
-		FXMLLoader loader = new FXMLLoader(Main.class.getResource("Start.fxml"));
+		FXMLLoader loader = new FXMLLoader(Main.class.getResource("Editmode.fxml"));
 		root = (Parent) loader.load();
 
 		Scene scene = new Scene(root);

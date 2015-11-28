@@ -11,7 +11,5 @@
       <Button layoutX="163.0" layoutY="171.0" mnemonicParsing="false" onAction="#cancel" text="Return" />
       <TextField fx:id="ID" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="194.0" promptText="Enter ID" />
       <TextField fx:id="updateName" layoutX="14.0" layoutY="47.0" prefHeight="25.0" prefWidth="194.0" promptText="Enter a new Name" />
-      <TextField fx:id="personNumber" layoutX="14.0" layoutY="83.0" prefHeight="25.0" prefWidth="194.0" promptText="Enter a new PersonNumber" />
-      <TextField fx:id="boatInfo" layoutX="14.0" layoutY="108.0" promptText="Boatname and Length" />
    </children>
 </AnchorPane>
