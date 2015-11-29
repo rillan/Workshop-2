@@ -2,12 +2,11 @@ package Controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
-import org.hibernate.Session;
 
 import Database.DB;
 import javafx.collections.FXCollections;
@@ -171,7 +170,7 @@ public class BoatController implements Initializable  {
 	@FXML
 	private void cancel(ActionEvent event)throws IOException{
 		Parent root = null;
-		FXMLLoader loader = new FXMLLoader(Main.class.getResource("Editmode.fxml"));
+		FXMLLoader loader = new FXMLLoader(Main.class.getResource("Application.fxml"));
 		root = (Parent) loader.load();
 
 		Scene scene = new Scene(root);

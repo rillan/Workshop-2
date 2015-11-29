@@ -22,7 +22,7 @@ import model.Boat;
 @Table(name = "Member")
 
 
-public class Member implements Iterator<Member> {
+public class Member {
 	
 	
 	@Id
@@ -33,6 +33,8 @@ public class Member implements Iterator<Member> {
 	public String name;
 	@Column(name = "personNumber")
 	public String personNumber;
+	@Column(name = "month")
+	public String month;
 	@Column(name = "numberOfBoats")
 	public int numberOfBoats = 0; 
 	@Column(name = "listofBoats")
@@ -53,6 +55,42 @@ public class Member implements Iterator<Member> {
 		
 		this.name = name;
 		this.personNumber = personNumber;
+		if(personNumber.substring(4, 6).equals("01") ){
+			this.month ="January";
+		}
+		if(personNumber.substring(4, 6).equals("02") ){
+			this.month ="Februari";
+		}
+		if(personNumber.substring(4, 6).equals("03") ){
+			this.month ="Mars";
+		}
+		if(personNumber.substring(4, 6).equals("04") ){
+			this.month ="April";
+		}
+		if(personNumber.substring(4, 6).equals("05") ){
+			this.month ="May";
+		}
+		if(personNumber.substring(4, 6).equals("06") ){
+			this.month ="June";
+		}
+		if(personNumber.substring(4, 6).equals("07") ){
+			this.month ="July";
+		}
+		if(personNumber.substring(4, 6).equals("08") ){
+			this.month ="August";
+		}
+		if(personNumber.substring(4, 6).equals("09") ){
+			this.month ="September";
+		}
+		if(personNumber.substring(4, 6).equals("10") ){
+			this.month ="October";
+		}
+		if(personNumber.substring(4, 6).equals("11") ){
+			this.month ="November";
+		}
+		if(personNumber.substring(4, 6).equals("12") ){
+			this.month ="December";
+		}
 		
 		
 
@@ -100,25 +138,14 @@ public class Member implements Iterator<Member> {
 	}
 	
 
-	@Override
-	public boolean hasNext() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 	public long getId(){
 		return this.id;
 	}
 
-	@Override
-	public Member next() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
-	public static Iterator iterator() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	
 

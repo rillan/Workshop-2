@@ -2,7 +2,7 @@ package Controller;
 
 
 import java.io.IOException;
-import java.lang.reflect.Field;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -27,7 +27,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import model.Boat;
+
 import model.Member;
 import view.Main;
 
@@ -42,9 +42,10 @@ public class MemberController implements Initializable   {
 		private Button login;
 	 @FXML
 	    private ListView verboseList ;
-	 
 	 @FXML
-	    private ListView oneMember ;
+	 List<Member> list = new ArrayList<>();
+	 @FXML
+	    private ListView  oneMember ;
 	 @FXML
 	    private TextField memberID;
 	 @FXML
@@ -155,7 +156,7 @@ public class MemberController implements Initializable   {
 	    			
 	    		Parent root = null;
 	    		
-	        	FXMLLoader loader = new FXMLLoader(Main.class.getResource("Editmode.fxml"));
+	        	FXMLLoader loader = new FXMLLoader(Main.class.getResource("Application.fxml"));
 	        	root = (Parent) loader.load();
 	       	 Scene scene = new Scene(root);
 	        	 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -184,7 +185,7 @@ public class MemberController implements Initializable   {
 		    			
 		    		Parent root = null;
 		    		
-		        	FXMLLoader loader = new FXMLLoader(Main.class.getResource("Editmode.fxml"));
+		        	FXMLLoader loader = new FXMLLoader(Main.class.getResource("Application.fxml"));
 		        	root = (Parent) loader.load();
 		       	 Scene scene = new Scene(root);
 		        	 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -240,6 +241,7 @@ public class MemberController implements Initializable   {
     
    @FXML
    public void showMember(ActionEvent event)throws IOException{
+	   
 	   if(memberID.getText().matches(numbers)){
 	   try
        {
@@ -271,7 +273,7 @@ public class MemberController implements Initializable   {
 	    private void cancel(ActionEvent event)throws IOException{
 	    	
 	    	Parent root = null;
-	    	FXMLLoader loader = new FXMLLoader(Main.class.getResource("Editmode.fxml"));
+	    	FXMLLoader loader = new FXMLLoader(Main.class.getResource("Application.fxml"));
 	    	root = (Parent) loader.load();
 	    	if(Main.getMyVariable().matches(loggedIn)){
 	    		
@@ -283,7 +285,7 @@ public class MemberController implements Initializable   {
 	    	 stage.show();
 	    	}
 	    	else{
-	    		loader = new FXMLLoader(Main.class.getResource("Editmode.fxml"));
+	    		loader = new FXMLLoader(Main.class.getResource("Application.fxml"));
 				
 				root = loader.load();
 				
@@ -304,12 +306,12 @@ public class MemberController implements Initializable   {
 	    	
 	    }
 	    
-	    // Method to show the compose list
+	    // Method to show the verbose list
 	    
 	    @FXML
 		public void showVerbose(){
 			
-	        List<Member> list = new ArrayList<>();
+	       
 	        list.addAll(DB.members().findAll());
 	        for (Member event : list) { //for better performance
 				verboseInformation.add(event.getVerbose(event));
@@ -318,12 +320,12 @@ public class MemberController implements Initializable   {
 	        }
 	    }
 	    
-	    // Method to show the verboselist
+	    // Method to show the compose list
 	    
 	    @FXML
 		public void showCompose(){
 			
-	        List<Member> list = new ArrayList<>();
+	        
 	        list.addAll(DB.members().findAll());
 	        for (Member event : list) { //for better performance
 	        	composeInformation.add(event.getCompose());
@@ -346,7 +348,11 @@ public class MemberController implements Initializable   {
     	String test = deleteTextField.getText();
     	Long id = Long.parseLong(test);
     	member = (Member) DB.members().findById(id);
-    	DB.members().delete(member);
+//    	DB.members().delete(member);
+    	
+    	List<Member> m = DB.members().findAll();
+    	for(Member me:m)
+    		DB.members().delete(me);
         id =null;
         }
 		 

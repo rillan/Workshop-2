@@ -18,19 +18,33 @@ public class BoatDAO implements databaseInterface<Boat> {
 	
 	@Override
 	public void update(Boat entity) {
+		try{
 		Transaction transaction = session.beginTransaction();
 		session.update(entity);
 		transaction.commit();
+		}
+		catch (RuntimeException e) {
+			session.getTransaction().rollback();
+		    throw e;
+	
+	
+		}
 	}
 
 	@Override
 	public void delete(Boat entity) {
-	
+	try{
 		Transaction transaction = session.beginTransaction();
 		
 		session.delete(entity);
 		transaction.commit();
-		
+	}
+	catch (RuntimeException e) {
+		session.getTransaction().rollback();
+	    throw e;
+
+
+	}
 		
 	}
 
@@ -47,9 +61,17 @@ public class BoatDAO implements databaseInterface<Boat> {
 
 	@Override
 	public void save(Boat entity) {
+		try{
 		Transaction transaction = session.beginTransaction();
         session.persist(entity);
         transaction.commit();
+		}
+		catch (RuntimeException e) {
+			session.getTransaction().rollback();
+		    throw e;
+	
+	
+		}
 	}
 
 	@Override

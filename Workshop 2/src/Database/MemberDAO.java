@@ -6,8 +6,7 @@ import org.hibernate.Transaction;
 
 import model.Member;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
+
 import java.util.List;
 
 public class MemberDAO implements databaseInterface<Member> {
@@ -18,9 +17,17 @@ public class MemberDAO implements databaseInterface<Member> {
 		}
 	@Override
 	public void update(Member entity) {
+		try{
 		Transaction transaction = session.beginTransaction();
 		session.update(entity);
 		transaction.commit();
+		}
+		catch (RuntimeException e) {
+			session.getTransaction().rollback();
+		    throw e;
+	
+	
+		}
 	}
 	
 	@Override
@@ -30,9 +37,17 @@ public class MemberDAO implements databaseInterface<Member> {
 
 	@Override
 	public void delete(Member entity) {
+		try{
 		Transaction transaction = session.beginTransaction();
 		session.delete(entity);
 		transaction.commit();
+		}
+		catch (RuntimeException e) {
+			session.getTransaction().rollback();
+		    throw e;
+	
+	
+		}
 	}
 
 	@Override
@@ -50,13 +65,18 @@ public class MemberDAO implements databaseInterface<Member> {
 	}
 	@Override
 	public void save(Member entity) {
+		try {
+		    
 		Transaction transaction = session.beginTransaction();
         session.persist(entity);
         transaction.commit();
-       
+		}
+		catch (RuntimeException e) {
+			session.getTransaction().rollback();
+		    throw e;
 	
 	
-     
+		}
 	}
 
 }
