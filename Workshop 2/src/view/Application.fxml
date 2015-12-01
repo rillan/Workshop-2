@@ -22,8 +22,8 @@
       <Button fx:id="create" mnemonicParsing="false" onAction="#createMember" text="Create member" GridPane.rowIndex="2" />
       <Button fx:id="verbose" mnemonicParsing="false" onAction="#showVerbose" text="Open verbose view" GridPane.columnIndex="2" GridPane.rowIndex="1" />
       <Button fx:id="delete" mnemonicParsing="false" onAction="#deleteMember" text="Delete Member" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-      <Button fx:id="compose" mnemonicParsing="false" onAction="#showCompose" text="Open compact view" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <Button fx:id="updateButton" layoutX="10.0" layoutY="65.0" mnemonicParsing="false" onAction="#updateMember" text="Update member" GridPane.rowIndex="3" />
+      <Button fx:id="compact" mnemonicParsing="false" onAction="#showCompact" text="Open compact view" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <Button fx:id="updateMemberButton" layoutX="10.0" layoutY="65.0" mnemonicParsing="false" onAction="#updateMember" text="Update member" GridPane.rowIndex="3" />
       <Button fx:id="deleteBoat" mnemonicParsing="false" onAction="#deleteBoatMethod" text="Delete Boat" GridPane.columnIndex="2" GridPane.rowIndex="2" />
       <Button fx:id="registerBoat" mnemonicParsing="false" onAction="#registerBoat" text="Register Boat" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       <Button fx:id="changeBoat" mnemonicParsing="false" onAction="#updateBoat" text="Change Boat info" GridPane.columnIndex="3" GridPane.rowIndex="2" />

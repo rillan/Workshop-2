@@ -115,11 +115,11 @@ public class Member {
 		
 		return "Membername: "+ member.name +" Personnumber: " +member.personNumber +" Id: " + member.id +"\n Boatinformation "+ numberOfBoats+" "+ info ;
 		}
-		else{
+		else {
 			return "Membername: " +name +"Personnumber: " + personNumber + "Id: "+member.id+ "Has 0 boats";
-		}
+		
 	}
-	
+	}
 	public String getMemberAndBoatInfo(){
 		return this.name +" " + this.personNumber +" "+ this.numberOfBoats;
 	}

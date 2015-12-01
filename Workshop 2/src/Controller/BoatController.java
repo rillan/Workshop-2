@@ -32,7 +32,7 @@ public class BoatController implements Initializable  {
 	
 	
 	@FXML
-    private ListView<String> boatSelector = new ListView<String>();
+    private ListView<String> boatSelecter = new ListView<String>();
 	@FXML
 	Button deleteOk;
 	@FXML
@@ -48,19 +48,16 @@ public class BoatController implements Initializable  {
 
 	@FXML
 	private Button returnBoat;
-	Pattern patternA = Pattern.compile("[a-zA-Z]+");
+	Pattern patternAlphabet = Pattern.compile("[a-zA-Z]+");
 
-	Pattern patternD = Pattern.compile("[0-9]+");
-	Pattern boatType = Pattern.compile("Kayak|Canoe|Motorboat|Other");
+	Pattern patternNumbers = Pattern.compile("[0-9]+");
+	
 	@FXML
-	private String alphabet = patternA.toString() ;
+	private String alphabet = patternAlphabet.toString() ;
 	@FXML
-	private String numbers = patternD.toString();
+	private String numbers = patternNumbers.toString();
 
-	@FXML
-	private String boatString = boatType.toString();
-
-	@FXML
+		@FXML
 	private TextField updateBoatLength;
 
 	@FXML
@@ -74,7 +71,7 @@ public class BoatController implements Initializable  {
 
 	@FXML
 	private TextField boatID;
-	
+	// Values to be inserted in the list view, the different types
 	@FXML
 	private static ObservableList<String> items =FXCollections.observableArrayList (
 		    "Kayak/canoe", "Other", "Motorsailer", "Sailboat");
@@ -93,7 +90,7 @@ public class BoatController implements Initializable  {
 			System.out.println("ths is id"+ id);
 			boat = (Boat) DB.boats().findById(id);
 			
-			String newType = boatSelector.getSelectionModel().getSelectedItem();
+			String newType = boatSelecter.getSelectionModel().getSelectedItem();
 			String boatsNewLength = updateBoatLength.getText();
 			int convertedLength = Integer.parseInt(boatsNewLength);
 			
@@ -127,7 +124,7 @@ public class BoatController implements Initializable  {
 	@Override
 	  public void initialize(URL url, ResourceBundle rb) {
 		 list.setItems(items);
-		 boatSelector.setItems(items);
+		 boatSelecter.setItems(items);
 	  }
 	//	Method for adding a boat
 

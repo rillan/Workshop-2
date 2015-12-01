@@ -6,11 +6,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="pane" prefHeight="192.0" prefWidth="239.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MemberController">
+<AnchorPane fx:id="pane" prefHeight="281.0" prefWidth="385.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MemberController">
    <children>
-      <TextField fx:id="name" layoutY="28.0" promptText="Enter the name" />
-      <TextField fx:id="personnumber" layoutY="74.0" promptText="Enter person number" />
-      <Button fx:id="create" layoutY="127.0" mnemonicParsing="false" onAction="#addMember" text="Create member" />
-      <Button fx:id="cancel" layoutX="128.0" layoutY="127.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
+      <TextField fx:id="name" layoutY="28.0" prefHeight="25.0" prefWidth="280.0" promptText="Enter the name" />
+      <TextField fx:id="personnumber" layoutY="74.0" prefHeight="25.0" prefWidth="280.0" promptText="Enter person number in format&quot;yyyymmdd--xxxx&quot;" />
+      <Button fx:id="create" layoutX="48.0" layoutY="128.0" mnemonicParsing="false" onAction="#addMember" text="Create member" />
+      <Button fx:id="cancel" layoutX="213.0" layoutY="128.0" mnemonicParsing="false" onAction="#cancel" text="Cancel" />
    </children>
 </AnchorPane>

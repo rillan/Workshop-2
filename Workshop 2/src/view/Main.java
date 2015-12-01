@@ -64,11 +64,11 @@ public class Main extends Application {
 	@FXML
 	private Button verbose;
 	@FXML
-	private Button updateButton;
+	private Button updateMemberButton;
 	@FXML
 	private Button registerBoat;
 	@FXML
-	private Button compose;
+	private Button compact;
 	@FXML
 	private Button returnLogin;
 	@FXML
@@ -83,6 +83,7 @@ public class Main extends Application {
 	private GridPane grid;
 	@FXML
 	private Button singleMemberButton;
+	
 	@FXML
 	private Button create;
 	@FXML
@@ -130,6 +131,8 @@ public class Main extends Application {
 	    private Button older;
 	@FXML
 	private TextField username;
+	
+
 	public static void main(String[] args) {
 
 
@@ -148,6 +151,9 @@ public class Main extends Application {
 		primaryStage.show();
 
 	}
+	// Methods to add, delete and change a member
+	
+	
 	@FXML
 	private void createMember(ActionEvent event) throws IOException{
 
@@ -171,11 +177,11 @@ public class Main extends Application {
 		List<Member> allMembers = DB.members().findAll();
 
 		for (Member m: allMembers){
-			System.out.println("The members id: "+ m.id);
+			System.out.println("The members name " + m.name+ " and id: "+ m.id );
 		}
 		Parent root = null;
 		if(event.getSource()== delete){
-			FXMLLoader loader = new FXMLLoader(Main.class.getResource("Delete.fxml"));
+			FXMLLoader loader = new FXMLLoader(Main.class.getResource("DeleteMember.fxml"));
 
 			root = (Parent) loader.load();
 		}
@@ -185,19 +191,7 @@ public class Main extends Application {
 		stage.setTitle("Delete a member");
 		stage.show();
 	}
-	@FXML
-	private void cancel(ActionEvent event)throws IOException{
-		Parent root = null;
-		FXMLLoader loader = new FXMLLoader(Main.class.getResource("Start.fxml"));
-		root = (Parent) loader.load();
-
-		Scene scene = new Scene(root);
-		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		stage.setTitle("Workshop 2");
-		stage.setScene(scene);
-		stage.show();
-
-	}
+	
 
 
 	@FXML
@@ -205,10 +199,10 @@ public class Main extends Application {
 		List<Member> allMembers = DB.members().findAll();
 
 		for (Member m: allMembers){
-			System.out.println("The members id: "+ m.id);
+			System.out.println("The members name " + m.name+" and id: " +m.id);
 		}
 		Parent root = null;
-		if(event.getSource()== updateButton){
+		if(event.getSource()== updateMemberButton){
 			FXMLLoader loader = new FXMLLoader(Main.class.getResource("UpdateMember.fxml"));
 
 			root = (Parent) loader.load();
@@ -220,14 +214,19 @@ public class Main extends Application {
 		stage.show();
 	}  
 
-	// Boat methods
+	// Methods to add, delete and change a boat
 
 	@FXML
 	private void registerBoat(ActionEvent event) throws IOException{
+		allMembersData = DB.members().findAll();
+		for(Member mBRegister: allMembersData ){
+			
+			System.out.println("The members name " + mBRegister.name+" and id: " +mBRegister.id);
 
+		}
 		Parent root = null;
 		if(event.getSource()== registerBoat){
-			FXMLLoader loader = new FXMLLoader(Main.class.getResource("RegisterBoat.fxml"));
+			FXMLLoader loader = new FXMLLoader(Main.class.getResource("AddBoat.fxml"));
 
 			root = (Parent) loader.load();
 		}
@@ -240,10 +239,11 @@ public class Main extends Application {
 	}  
 	@FXML
 	private void deleteBoatMethod(ActionEvent event) throws IOException{
-		List<Boat> allBoats = DB.boats().findAll();
+		List<Boat> allBoatsDelete = DB.boats().findAll();
 
-		for(Boat b: allBoats){
-			System.out.println("The boats id: "+b.id +" and the member id is: "+ b.memberID);
+		for(Boat bDelete: allBoatsDelete){
+			Member mBDelete = DB.members().findById(bDelete.memberID);
+			System.out.println("The boats id: "+bDelete.id +" The members name " + mBDelete.name+" and id: " +mBDelete.id);
 
 		}
 		Parent root = null;
@@ -258,6 +258,33 @@ public class Main extends Application {
 		stage.setTitle("Delete a boat");
 		stage.show();
 	}  
+
+
+
+	@FXML
+	public void updateBoat(ActionEvent event) throws IOException{
+		List<Boat> allBoatUpdate = DB.boats().findAll();
+		for(Boat bUpdate:allBoatUpdate ){
+			Member mBUpdate = DB.members().findById(bUpdate.memberID);
+			System.out.println("The boats id "+ bUpdate.id+" and the members name "+ mBUpdate .name+" and id " +bUpdate.memberID);
+		}
+		Parent root = null;
+		if(event.getSource()== changeBoat){
+			FXMLLoader loader = new FXMLLoader(Main.class.getResource("UpdateBoat.fxml"));
+
+			root = (Parent) loader.load();
+		}
+		Scene scene = new Scene(root);
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		stage.setScene(scene);
+		stage.setTitle("Update a Boat");
+		stage.show();
+
+	}
+	
+	// Different methods for log in to the application and returning from other scenes
+	
+
 	@FXML
 	public void login(ActionEvent event) throws IOException{
 		Connection con = null;
@@ -272,7 +299,7 @@ public class Main extends Application {
 					FXMLLoader loader = new FXMLLoader(Main.class.getResource("Application.fxml"));
 					root = (Parent) loader.load();
 
-					Main.setMyVariable();
+					Main.setLoggedIn();
 					Scene scene = new Scene(root);
 					Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 					stage.setScene(scene);
@@ -305,6 +332,8 @@ public class Main extends Application {
 			}
 		}
 	}
+	
+	// Return to the loginpage
 	@FXML 
 	public void returnToLogin (ActionEvent event) throws IOException{
 		if(event.getSource()== returnLogin){
@@ -318,13 +347,15 @@ public class Main extends Application {
 			stage.show();
 		}
 	}
+	
+	// The viewmode method
 	@FXML
 	public void viewMode (ActionEvent event) throws IOException{
 		if(event.getSource()== view){
 			FXMLLoader loader = new FXMLLoader(Main.class.getResource("Application.fxml"));
 
 			root = loader.load();
-
+			// Hides the components that are used in the editmode
 			((GridPane) root).getChildren().remove(6);
 			((GridPane) root).getChildren().remove(2);
 			((GridPane) root).getChildren().remove(5);
@@ -340,53 +371,29 @@ public class Main extends Application {
 			stage.show();
 		}
 	} 
-
-
-
+	
+	
+	// Methods to show the different kinds of information
+	
 	@FXML
-	public void updateBoat(ActionEvent event) throws IOException{
+	public void showCompact(ActionEvent event) throws IOException{
 
 		Parent root = null;
-		if(event.getSource()== changeBoat){
-			FXMLLoader loader = new FXMLLoader(Main.class.getResource("UpdateBoat.fxml"));
+		if(event.getSource()== compact){
+			FXMLLoader loader = new FXMLLoader(Main.class.getResource("CompactView.fxml"));
 
 			root = (Parent) loader.load();
 		}
 		Scene scene = new Scene(root);
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		stage.setScene(scene);
-		stage.setTitle("Update a Boat");
-		stage.show();
-
-	}
-	@FXML
-	public void showCompose(ActionEvent event) throws IOException{
-
-		Parent root = null;
-		if(event.getSource()== compose){
-			FXMLLoader loader = new FXMLLoader(Main.class.getResource("compactView.fxml"));
-
-			root = (Parent) loader.load();
-		}
-		Scene scene = new Scene(root);
-		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		stage.setScene(scene);
-		stage.setTitle("Compose view");
+		stage.setTitle("Compact view");
 		stage.show();
 
 	}
 
-	@FXML
-	public static String setMyVariable() {
-		verifyLogged ="true";
-		return verifyLogged;
-	}
-	@FXML
-	public static String getMyVariable() {
-
-		return verifyLogged;
-	}
-
+	
+	 // Show the verbose view
 
 
 	@FXML
@@ -394,7 +401,7 @@ public class Main extends Application {
 
 		Parent root = null;
 		if(event.getSource()== verbose){
-			FXMLLoader loader = new FXMLLoader(Main.class.getResource("verboseView.fxml"));
+			FXMLLoader loader = new FXMLLoader(Main.class.getResource("VerboseView.fxml"));
 
 			root = (Parent) loader.load();
 		}
@@ -405,7 +412,7 @@ public class Main extends Application {
 		stage.show();
 
 	}
-
+ // Show one members single information
 	@FXML
 	public void showOneMember(ActionEvent event) throws IOException{
 
@@ -413,10 +420,10 @@ public class Main extends Application {
 		if(event.getSource()== singleMemberButton){
 			List<Member> list = DB.members().findAll();
 
-			for(Member m: list){
-				System.out.println("The members id: "+m.id);
+			for(Member mShowOne: list){
+				System.out.println("The members name and id: "+mShowOne.name +" "+mShowOne.id);
 			}
-			FXMLLoader loader = new FXMLLoader(Main.class.getResource("singleMemberView.fxml"));
+			FXMLLoader loader = new FXMLLoader(Main.class.getResource("SingleMemberView.fxml"));
 
 			root = (Parent) loader.load();
 		}
@@ -432,36 +439,41 @@ public class Main extends Application {
 
 	// The pattern as follows: 1: Clear the list of all members then repopulate it.
 	//                         2: Get the value of the searchfield
-	//						   3: For every member in the data base add the value of the members name, personnumber, month and 
-	//							  in the members arraylist of boats to strings with a suitable name e.g String name = the members name.
+	//						   3: Depending on the condition of the search perform a certain search. Generic search is a regular search, certain sign 
+	//								looks for certain signs and the year search is either older, younger or born this year.
 	//						   4: Search the variables and see if any of them matches the specified searchvalue. If it's a match add it to the
 	//								observablelist
 
+	
+	
+		
+	// The generic search that matches certain characters.
+	
 	@FXML
-	public void searchingDB(){
+	public void searchingDB()throws IOException{
 		allMembersData.clear();
 		filteredData.clear();
-		listWithFilteredData.setItems(filteredData);
+		
 		allMembersData.addAll(DB.members().findAll());
 
-		String boatInfo = "";
-
+		
 		String filter = searchField.getText().toLowerCase().trim(); 
-		System.out.println(filter);
-		for(Member member : allMembersData){
-			String name = member.name.toLowerCase().trim();
-			String personNumber = member.personNumber;
-			String monthsName = member.month.toLowerCase().trim();
+		if(filter.length()!=0)
+		for(Member mSearchText : allMembersData){
+			String name = mSearchText.name.toLowerCase().trim();
+			String personNumber = mSearchText.personNumber;
+			String monthsName = mSearchText.month.toLowerCase().trim();
 			String year = personNumber.substring(0,3);
 			String  month = personNumber.substring(4,6);
 			String  day = personNumber.substring(7,9);
-			for(Boat boat:member.listofBoats ){
+			String boatInfo ="";
+			for(Boat bMSearchText:mSearchText.listofBoats ){
 
-				boatInfo = boat.type.toLowerCase().trim() + boat.length;
-
+				boatInfo = bMSearchText.type.toLowerCase().trim() + bMSearchText.length;
+				
 			}
-			if(name.contains(filter) || monthsName.contains(filter)||  boatInfo.contains(filter) || day.contains(filter)||month.contains(filter) || year.contains(filter)){
-				filteredData.add(member.getVerbose(member));
+			if(name.contains(filter) || monthsName.contains(filter)||  boatInfo.trim().contains(filter) || day.contains(filter)||month.contains(filter) || year.contains(filter)){
+				filteredData.add(mSearchText.getVerbose(mSearchText));
 				listWithFilteredData.setItems(filteredData);
 
 
@@ -470,23 +482,25 @@ public class Main extends Application {
 
 		}
 	}
+	
+	// Method for searching for year specific conditions: older than, younger than or born a certain year.
 	@FXML
-	public void searchforYears(ActionEvent event) throws IOException, ParseException{
+	public void searchforYears(ActionEvent event) throws IOException{
 		filteredData.clear();
 		listWithFilteredData.setItems(filteredData);
 		SimpleDateFormat year = new SimpleDateFormat("yyyy");
 		List <Member> allMembersAge =DB.members().findAll();
 		String inputYear = searchForYear.getText();
-	
+		try{
 		Date inputedValue = year.parse(inputYear);
 		if(event.getSource()== older){
 			
-			for(Member m:allMembersAge){
-				String olderYear = m.personNumber.substring(0,4);
+			for(Member mSearchYear:allMembersAge){
+				String olderYear = mSearchYear.personNumber.substring(0,4);
 				System.out.println(olderYear);
 				Date olderDate = year.parse(olderYear);
 				if(olderDate.compareTo(inputedValue)<0){
-					filteredData.add(m.getVerbose(m));
+					filteredData.add( mSearchYear.getVerbose( mSearchYear));
 					listWithFilteredData.setItems(filteredData);
 				}
 			}
@@ -513,7 +527,10 @@ public class Main extends Application {
 		}
 		}
 			}
-		
+		catch (ParseException p){
+			
+		}
+	}
 		
 	
 
@@ -533,7 +550,7 @@ public class Main extends Application {
 			Scene scene = new Scene(root);
 			Stage stage = new Stage();
 			stage.setScene(scene);
-			stage.setTitle("Single member view");
+			stage.setTitle("Search view");
 			stage.show();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -543,24 +560,31 @@ public class Main extends Application {
 
 
 	}
+	
+	
+	
+	// Methods to verify if the user is logged in to the database or not.
+	// the setMyVariable is used to 
+	@FXML
+	public static String setLoggedIn() {
+		verifyLogged ="true";
+		return verifyLogged;
+	}
+	
 
+	@FXML
+	public static String getLoggedIn() {
 
-
-
-
+		return verifyLogged;
+	}
+	
+	
+	
 	@Override
 	public void stop() {
 		DB.closeSessionFactory();
 	}
 	public long getId() { return id; }
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		searchAgeComboBox.getItems().addAll(
-	            "jacob.smith@example.com",
-	            "isabella.johnson@example.com",
-	            "ethan.williams@example.com",
-	            "emma.jones@example.com",
-	            "michael.brown@example.com");
-
-	}
+	
 
 }
