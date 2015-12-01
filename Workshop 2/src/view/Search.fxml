@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="382.0" prefWidth="489.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.Main">
+   <children>
+      <ListView fx:id="listWithFilteredData" layoutX="106.0" layoutY="105.0" prefHeight="200.0" prefWidth="200.0" />
+      <TextField fx:id="searchField" layoutX="14.0" layoutY="12.0" text="&quot;Search the database&quot;" />
+      <Button fx:id="queryDB" layoutX="170.0" layoutY="12.0" mnemonicParsing="false" onAction="#searchingDB" text="Generic search" />
+      <TextField fx:id="searchForYear" layoutX="14.0" layoutY="49.0" text="&quot;Search for a certain age&quot;" />
+      <Button fx:id="bornThisYear" layoutX="172.0" layoutY="49.0" mnemonicParsing="false" onAction="#searchforYears" text="Born this year" />
+      <Button fx:id="younger" layoutX="273.0" layoutY="49.0" mnemonicParsing="false" onAction="#searchforYears" text="Younger than" />
+      <Button fx:id="older" layoutX="390.0" layoutY="49.0" mnemonicParsing="false" onAction="#searchforYears" text="Older than" />
+      
+   </children>
+</AnchorPane>

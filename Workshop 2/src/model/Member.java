@@ -100,7 +100,7 @@ public class Member {
 
 	
 	public  String getCompose(){
-		return "Name: "+name +" " +"Personnumber: "+ personNumber +" Number of Boats: " + numberOfBoats;
+		return "Name: " +name +" " +" Personnumber: "+ personNumber +" Number of Boats: " + numberOfBoats;
 		
 	}
 	
@@ -113,10 +113,10 @@ public class Member {
 		
 		}
 		
-		return "Membername: "+ member.name +" Personnumber: " +member.personNumber +" Id: " + member.id +"\n Boatinformation "+ numberOfBoats+" "+ info ;
+		return "Membername: "+ member.name + " Personnumber: " +member.personNumber +" Id: " + member.id +"\n Boatinformation "+ numberOfBoats+" "+ info ;
 		}
 		else {
-			return "Membername: " +name +"Personnumber: " + personNumber + "Id: "+member.id+ "Has 0 boats";
+			return "Membername: " +name +" Personnumber: " + personNumber + " Id: "+member.id+ " Has 0 boats";
 		
 	}
 	}
