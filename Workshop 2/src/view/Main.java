@@ -61,8 +61,7 @@ public class Main extends Application {
 	private static Session session;
 	@FXML
 	private static SessionFactory factory; 
-	@FXML
-	private Button verbose;
+	
 	
     @FXML
     private Button view;
