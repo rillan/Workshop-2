@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="382.0" prefWidth="489.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.Main">
+<AnchorPane prefHeight="382.0" prefWidth="489.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SearchController">
    <children>
       <ListView fx:id="listWithFilteredData" layoutX="106.0" layoutY="105.0" prefHeight="200.0" prefWidth="200.0" />
       <TextField fx:id="searchField" layoutX="14.0" layoutY="12.0" text="&quot;Search the database&quot;" />

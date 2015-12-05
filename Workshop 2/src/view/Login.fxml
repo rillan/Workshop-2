@@ -10,7 +10,7 @@
       <Button fx:id="login" layoutX="65.0" layoutY="274.0" mnemonicParsing="false" onAction="#login" text="Login" />
       <Button fx:id="view" layoutX="270.0" layoutY="274.0" mnemonicParsing="false" onAction="#viewMode" prefHeight="25.0" prefWidth="55.0" text="View" />
       <TextField fx:id="username" layoutX="31.0" layoutY="182.0" promptText="Username" />
-      <TextArea fx:id="applicationInformation" editable="false" layoutX="80.0" layoutY="79.0" prefHeight="68.0" prefWidth="273.0" promptText="Login to be able to edit the Member registry. To only view the current registry press view." wrapText="true" />
       <TextField fx:id="password" layoutX="223.0" layoutY="182.0" promptText="Password" />
+      <Label layoutX="15.0" layoutY="67.0" text="Login to be able to edit the Member registry. To only view the current registry press view." />
    </children>
 </AnchorPane>
